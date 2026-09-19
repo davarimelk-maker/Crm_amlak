@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ملکیار — CRM هوشمند املاک</title>
+<meta name="description" content="CRM هوشمند مشاوران املاک با دستیار هوش مصنوعی، ثبت صوتی و قیف فروش">
+<meta name="theme-color" content="#0F1218">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ملکیار">
+<meta name="application-name" content="ملکیار">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href='data:application/manifest+json,{"name":"ملکیار %E2%80%94 CRM هوشمند املاک","short_name":"ملکیار","start_url":".","scope":".","display":"standalone","background_color":"%230F1218","theme_color":"%230F1218","orientation":"portrait","dir":"rtl","lang":"fa","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27192%27 height=%27192%27%3E%3Crect width=%27192%27 height=%27192%27 rx=%2740%27 fill=%27%230F1218%27/%3E%3Crect x=%2718%27 y=%2718%27 width=%27156%27 height=%27156%27 rx=%2732%27 fill=%27%23C6A15B%27/%3E%3Ctext x=%2796%27 y=%27132%27 font-family=%27Arial,sans-serif%27 font-size=%2792%27 font-weight=%27800%27 fill=%27%23171308%27 text-anchor=%27middle%27%3E%D9%85%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}'>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%230F1218'/%3E%3Crect x='18' y='18' width='156' height='156' rx='32' fill='%23C6A15B'/%3E%3Ctext x='96' y='132' font-family='Arial,sans-serif' font-size='92' font-weight='800' fill='%23171308' text-anchor='middle'%3E%D9%85%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1218'/%3E%3Crect x='6' y='6' width='52' height='52' rx='11' fill='%23C6A15B'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='30' font-weight='800' fill='%23171308' text-anchor='middle'%3E%D9%85%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1218;
+    --surface:#171B23;
+    --surface-2:#1F2530;
+    --surface-3:#252C39;
+    --border:#2A3140;
+    --gold:#C6A15B;
+    --gold-dim:#8E7440;
+    --gold-glow:rgba(198,161,91,0.14);
+    --teal:#3E9284;
+    --teal-glow:rgba(62,146,132,0.14);
+    --red:#C1554A;
+    --red-glow:rgba(193,85,74,0.14);
+    --blue:#5B8DC6;
+    --blue-glow:rgba(91,141,198,0.14);
+    --purple:#8E7BC6;
+    --purple-glow:rgba(142,123,198,0.14);
+    --text:#ECEDEF;
+    --text-dim:#9AA1AF;
+    --text-faint:#5D6472;
+    --radius:14px;
+    --radius-sm:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+  }
+  #app{
+    width:100%;
+    max-width:480px;
+    height:100vh;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, var(--gold-glow), transparent 40%),
+      radial-gradient(circle at 90% 8%, var(--teal-glow), transparent 35%);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    flex-shrink:0;
+    padding:calc(18px + env(safe-area-inset-top)) 18px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    background:rgba(15,18,24,0.85);
+    backdrop-filter:blur(8px);
+    z-index:5;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(150deg,var(--gold),var(--gold-dim));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:#171308;font-size:17px;
+    box-shadow:0 4px 14px rgba(198,161,91,0.35);
+  }
+  .brand-text h1{font-size:17px;font-weight:700;letter-spacing:0.2px;}
+  .brand-text p{font-size:11px;color:var(--text-faint);margin-top:1px;}
+  .header-icon-btn{
+    width:38px;height:38px;border-radius:11px;background:var(--surface-2);
+    border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+    color:var(--text-dim);
+  }
+
+  /* ---------- MAIN ---------- */
+  main{
+    flex:1;
+    overflow-y:auto;
+    padding:16px 16px 90px;
+    scroll-behavior:smooth;
+  }
+  main::-webkit-scrollbar{width:0px;}
+  .section-title{
+    font-size:15px;font-weight:700;margin:6px 2px 12px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .section-title span.count{font-size:11px;color:var(--text-faint);font-weight:500;}
+
+  /* ---------- DASHBOARD ---------- */
+  .greet{margin-bottom:16px;}
+  .greet .jdate{font-size:11px;color:var(--gold);font-weight:600;margin-bottom:6px;}
+  .greet h2{font-size:20px;font-weight:800;}
+  .greet p{font-size:12.5px;color:var(--text-dim);margin-top:4px;line-height:1.9;}
+
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .stat-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px;position:relative;overflow:hidden;
+  }
+  .stat-card .icon{
+    width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;font-size:14px;
+  }
+  .stat-card .val{font-size:21px;font-weight:800;}
+  .stat-card .lbl{font-size:11px;color:var(--text-dim);margin-top:3px;}
+
+  .cat-row{display:flex;gap:7px;overflow-x:auto;margin-bottom:20px;padding-bottom:2px;}
+  .cat-pill{
+    flex-shrink:0;background:var(--surface);border:1px solid var(--border);border-radius:100px;
+    padding:7px 13px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .cat-pill b{color:var(--text);font-weight:700;}
+
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px;margin-bottom:10px;
+  }
+  .card-row{display:flex;align-items:center;justify-content:space-between;}
+
+  .ai-nudge{
+    background:linear-gradient(120deg,var(--surface-2),var(--surface));
+    border:1px solid var(--gold-dim);
+    border-radius:var(--radius);
+    padding:16px;margin-bottom:14px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .ai-nudge .dot{
+    width:34px;height:34px;border-radius:10px;flex-shrink:0;
+    background:var(--gold-glow);border:1px solid var(--gold-dim);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:15px;
+  }
+  .ai-nudge h3{font-size:13.5px;font-weight:700;margin-bottom:3px;}
+  .ai-nudge p{font-size:11.5px;color:var(--text-dim);line-height:1.8;margin-bottom:0;}
+  .ai-nudge button.cta{
+    font-family:inherit;font-size:12px;font-weight:600;color:#171308;
+    background:var(--gold);border:none;border-radius:8px;padding:7px 14px;cursor:pointer;margin-top:10px;
+  }
+
+  .list-item{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:13px;margin-bottom:9px;
+  }
+  .li-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .li-title{font-size:13.5px;font-weight:700;}
+  .li-sub{font-size:11px;color:var(--text-faint);margin-top:3px;}
+  .li-meta{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center;}
+  .chip{
+    font-size:10.5px;padding:3px 9px;border-radius:100px;border:1px solid var(--border);
+    color:var(--text-dim);background:var(--surface-2);
+  }
+  .chip.gold{color:var(--gold);border-color:var(--gold-dim);background:var(--gold-glow);}
+  .chip.teal{color:var(--teal);border-color:var(--teal);background:var(--teal-glow);}
+  .chip.red{color:var(--red);border-color:var(--red);background:var(--red-glow);}
+  .chip.blue{color:var(--blue);border-color:var(--blue);background:var(--blue-glow);}
+  .chip.purple{color:var(--purple);border-color:var(--purple);background:var(--purple-glow);}
+  .li-price{font-size:13px;font-weight:800;color:var(--gold);white-space:nowrap;text-align:left;}
+  .li-price small{display:block;font-size:9.5px;color:var(--text-faint);font-weight:500;}
+  .li-date{font-size:9.5px;color:var(--text-faint);margin-top:8px;}
+
+  .empty{
+    text-align:center;padding:50px 20px;color:var(--text-faint);
+  }
+  .empty .em-icon{font-size:30px;margin-bottom:10px;opacity:0.5;}
+  .empty p{font-size:12.5px;line-height:1.8;}
+
+  /* ---------- FAB ---------- */
+  .fab{
+    position:absolute;bottom:88px;left:18px;
+    width:52px;height:52px;border-radius:16px;
+    background:linear-gradient(150deg,var(--gold),var(--gold-dim));
+    border:none;color:#171308;font-size:26px;font-weight:400;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(198,161,91,0.35);
+    z-index:10;
+  }
+
+  /* ---------- BOTTOM NAV ---------- */
+  nav.bottom{
+    flex-shrink:0;
+    display:flex;
+    border-top:1px solid var(--border);
+    background:rgba(15,18,24,0.92);
+    backdrop-filter:blur(10px);
+    padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    position:relative;z-index:5;
+  }
+  .nav-btn{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+    background:none;border:none;color:var(--text-faint);padding:6px 2px;
+    font-family:inherit;font-size:9.5px;font-weight:600;border-radius:10px;
+  }
+  .nav-btn svg{width:20px;height:20px;}
+  .nav-btn.active{color:var(--gold);}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:absolute;inset:0;background:rgba(8,9,12,0.72);
+    display:none;align-items:flex-end;justify-content:center;z-index:20;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    width:100%;max-width:480px;background:var(--surface);
+    border-radius:20px 20px 0 0;border:1px solid var(--border);border-bottom:none;
+    max-height:88%;overflow-y:auto;padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+    animation:slideUp 0.25s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .modal h2{font-size:16px;font-weight:800;margin-bottom:16px;}
+  .field{margin-bottom:12px;}
+  .field label{font-size:11.5px;color:var(--text-dim);display:block;margin-bottom:6px;}
+  .field input,.field select,.field textarea{
+    width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:11px 12px;color:var(--text);font-family:inherit;font-size:13px;
+  }
+  .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239AA1AF'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center;padding-left:28px;}
+  .field textarea{resize:none;min-height:70px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .seg{display:flex;gap:7px;flex-wrap:wrap;}
+  .seg button{
+    flex:1;min-width:44%;padding:9px 6px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);
+    color:var(--text-dim);font-family:inherit;font-size:11.5px;font-weight:600;
+  }
+  .seg button.sel{background:var(--gold-glow);border-color:var(--gold-dim);color:var(--gold);}
+  .modal-actions{display:flex;gap:10px;margin-top:16px;}
+  .btn-primary{
+    flex:1;padding:12px;border-radius:11px;border:none;background:var(--gold);
+    color:#171308;font-family:inherit;font-weight:700;font-size:13px;
+  }
+  .btn-ghost{
+    padding:12px 16px;border-radius:11px;border:1px solid var(--border);background:transparent;
+    color:var(--text-dim);font-family:inherit;font-weight:600;font-size:13px;
+  }
+
+  /* ---------- VOICE ---------- */
+  .mic-btn{
+    width:34px;height:34px;border-radius:10px;background:var(--gold-glow);
+    border:1px solid var(--gold-dim);color:var(--gold);display:flex;align-items:center;justify-content:center;
+  }
+  .voice-stage{display:flex;flex-direction:column;align-items:center;padding:20px 6px 6px;}
+  .mic-big{
+    width:78px;height:78px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--text-dim);position:relative;margin-bottom:16px;
+  }
+  .mic-big.rec{color:var(--red);border-color:var(--red);}
+  .mic-big.rec::before{
+    content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--red);
+    animation:pulseRing 1.4s ease-out infinite;
+  }
+  @keyframes pulseRing{0%{transform:scale(0.9);opacity:0.8;}100%{transform:scale(1.35);opacity:0;}}
+  .voice-status{font-size:12px;color:var(--text-dim);margin-bottom:14px;text-align:center;}
+  .voice-transcript{
+    width:100%;min-height:70px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:12px;font-size:13px;color:var(--text);line-height:1.9;margin-bottom:14px;
+  }
+  .voice-transcript.placeholder{color:var(--text-faint);}
+  .match-item{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:9px;
+  }
+  .match-item .mt{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .match-item .mr{font-size:11.5px;color:var(--text-dim);line-height:1.8;}
+  .match-score{display:inline-block;font-size:10.5px;color:var(--teal);background:var(--teal-glow);border:1px solid var(--teal);padding:2px 9px;border-radius:100px;margin-bottom:6px;}
+
+  /* ---------- FUNNEL ---------- */
+  .funnel-wrap{margin-bottom:22px;}
+  .funnel-row{margin-bottom:13px;}
+  .funnel-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+  .funnel-top b{font-size:12.5px;font-weight:700;}
+  .funnel-top .fc{font-size:11.5px;color:var(--text-dim);font-weight:700;}
+  .funnel-bar-bg{width:100%;height:10px;background:var(--surface-2);border-radius:100px;overflow:hidden;border:1px solid var(--border);}
+  .funnel-bar-fill{height:100%;border-radius:100px;transition:width .5s ease;}
+  .funnel-conv{font-size:10px;color:var(--text-faint);margin-top:4px;}
+  .funnel-lost{margin-top:6px;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--red-glow);border:1px solid var(--red);border-radius:12px;font-size:11.5px;color:var(--red);}
+
+  /* ---------- KANBAN ---------- */
+  .kanban-col{margin-bottom:18px;}
+  .kanban-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .kanban-head .dot2{width:8px;height:8px;border-radius:50%;}
+  .kanban-head h4{font-size:12.5px;font-weight:700;}
+  .kanban-head span{font-size:10.5px;color:var(--text-faint);}
+  .deal-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:11px;margin-bottom:8px;
+  }
+  .deal-card .dt{font-size:12.5px;font-weight:700;margin-bottom:4px;}
+  .deal-card .dm{font-size:10.5px;color:var(--text-faint);}
+  .deal-card .df{display:flex;justify-content:space-between;align-items:center;margin-top:9px;}
+  .move-btn{
+    font-size:10.5px;color:var(--gold);background:var(--gold-glow);border:1px solid var(--gold-dim);
+    padding:4px 10px;border-radius:8px;font-family:inherit;font-weight:600;
+  }
+
+  /* ---------- AI CHAT ---------- */
+  #ai-view{display:flex;flex-direction:column;height:100%;}
+  .chat-scroll{flex:1;overflow-y:auto;padding-bottom:10px;}
+  .msg{max-width:85%;margin-bottom:10px;padding:11px 13px;border-radius:14px;font-size:12.8px;line-height:1.9;}
+  .msg.user{margin-right:0;margin-left:auto;background:var(--gold-glow);border:1px solid var(--gold-dim);border-bottom-left-radius:4px;}
+  .msg.ai{margin-left:0;background:var(--surface);border:1px solid var(--border);border-bottom-right-radius:4px;white-space:pre-wrap;}
+  .quick-row{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;}
+  .quick-chip{
+    flex-shrink:0;font-size:11.5px;color:var(--text-dim);background:var(--surface-2);
+    border:1px solid var(--border);padding:8px 13px;border-radius:100px;font-family:inherit;
+  }
+  .chat-input-row{display:flex;gap:8px;align-items:flex-end;padding-top:8px;border-top:1px solid var(--border);}
+  .chat-input-row textarea{
+    flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+    padding:11px 14px;color:var(--text);font-family:inherit;font-size:13px;resize:none;max-height:90px;
+  }
+  .send-btn{
+    width:42px;height:42px;border-radius:12px;background:var(--gold);border:none;
+    display:flex;align-items:center;justify-content:center;color:#171308;flex-shrink:0;
+  }
+  .typing{display:flex;gap:4px;padding:4px 2px;}
+  .typing span{width:5px;height:5px;border-radius:50%;background:var(--text-faint);animation:blink 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:0.2s;}
+  .typing span:nth-child(3){animation-delay:0.4s;}
+  @keyframes blink{0%,60%,100%{opacity:0.3;}30%{opacity:1;}}
+
+  .toast{
+    position:absolute;bottom:100px;left:50%;transform:translateX(-50%);
+    background:var(--surface-3);border:1px solid var(--border);padding:10px 18px;border-radius:100px;
+    font-size:12px;z-index:30;opacity:0;pointer-events:none;transition:opacity 0.25s;
+  }
+  .toast.show{opacity:1;}
+
+  /* ---------- SEARCH & FILTER ---------- */
+  .search-row{display:flex;gap:8px;margin-bottom:10px;}
+  .search-box{
+    flex:1;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:10px 12px;color:var(--text-faint);
+  }
+  .search-box input{flex:1;background:none;border:none;color:var(--text);font-family:inherit;font-size:12.5px;}
+  .search-box input::placeholder{color:var(--text-faint);}
+  .filter-toggle-btn{
+    width:40px;height:40px;flex-shrink:0;border-radius:var(--radius-sm);background:var(--surface);
+    border:1px solid var(--border);color:var(--text-dim);display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .filter-toggle-btn.active{color:var(--gold);border-color:var(--gold-dim);background:var(--gold-glow);}
+  .filter-panel{display:none;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .filter-panel.open{display:flex;}
+  .filter-panel select{
+    flex:1;min-width:47%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:9px 10px;color:var(--text);font-family:inherit;font-size:12px;
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239AA1AF'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:left 10px center;padding-left:26px;
+  }
+  .result-count{font-size:11px;color:var(--text-faint);margin:0 2px 10px;}
+
+  /* ---------- QUICK ACTIONS ---------- */
+  .quick-actions{display:flex;gap:8px;margin-top:10px;}
+  .qa-btn{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:9px;
+    border:1px solid var(--border);background:var(--surface-2);color:var(--text-dim);font-size:11px;font-family:inherit;font-weight:600;
+    text-decoration:none;
+  }
+  .qa-btn.call{color:var(--blue);border-color:var(--blue);background:var(--blue-glow);}
+  .qa-btn.wa{color:var(--teal);border-color:var(--teal);background:var(--teal-glow);}
+
+  /* ---------- FOLLOW-UP ---------- */
+  .followup-badge{font-size:10px;padding:3px 9px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);background:var(--surface-2);}
+  .followup-badge.due{color:var(--red);border-color:var(--red);background:var(--red-glow);}
+  .followup-badge.today{color:var(--gold);border-color:var(--gold-dim);background:var(--gold-glow);}
+  .followup-card{
+    background:var(--surface);border:1px solid var(--red);border-radius:var(--radius);padding:13px;margin-bottom:9px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .followup-card .fu-name{font-size:13px;font-weight:700;}
+  .followup-card .fu-sub{font-size:10.5px;color:var(--text-faint);margin-top:2px;}
+
+  /* ---------- SETTINGS ---------- */
+  .settings-item{
+    display:flex;align-items:center;justify-content:space-between;padding:13px 2px;
+    border-bottom:1px solid var(--border);
+  }
+  .settings-item:last-child{border-bottom:none;}
+  .settings-item .si-title{font-size:12.5px;font-weight:600;}
+  .settings-item .si-sub{font-size:10.5px;color:var(--text-faint);margin-top:2px;}
+  .settings-item input[type=number]{
+    width:70px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
+    padding:7px 8px;color:var(--text);font-family:inherit;font-size:12.5px;text-align:center;
+  }
+  .file-hidden{display:none;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="brand">
+      <div class="brand-mark">م</div>
+      <div class="brand-text">
+        <h1>ملکیار</h1>
+        <p>دستیار هوشمند مشاور املاک</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="header-icon-btn" onclick="openSettingsModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 0 1-4 0v-.09A1.7 1.7 0 0 0 9 19.36a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 0 1 0-4h.09A1.7 1.7 0 0 0 4.64 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1-1.55V3a2 2 0 0 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 0 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
+      </button>
+      <button class="header-icon-btn" onclick="switchTab('ai')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <button class="fab" id="fabBtn">+</button>
+
+  <nav class="bottom">
+    <button class="nav-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      داشبورد
+    </button>
+    <button class="nav-btn" data-tab="properties" onclick="switchTab('properties')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="7" width="17" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M9 20v-5h6v5"/></svg>
+      املاک
+    </button>
+    <button class="nav-btn" data-tab="leads" onclick="switchTab('leads')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+      مشتریان
+    </button>
+    <button class="nav-btn" data-tab="pipeline" onclick="switchTab('pipeline')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></svg>
+      قیف فروش
+    </button>
+    <button class="nav-btn" data-tab="ai" onclick="switchTab('ai')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M9 3v3M15 3v3M9 13h.01M15 13h.01"/></svg>
+      دستیار
+    </button>
+  </nav>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalBody"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <input type="file" id="importFileInput" class="file-hidden" accept="application/json">
+</div>
+
+<script>
+/* ============ CONSTANTS ============ */
+const CATEGORY_LABELS = {apartment:'آپارتمان', villa:'ویلایی', land:'زمین', commercial:'تجاری', industrial:'صنعتی', agricultural:'کشاورزی'};
+const CATEGORY_ICON = {apartment:'🏢', villa:'🏡', land:'🗺️', commercial:'🏬', industrial:'🏭', agricultural:'🌾'};
+const DEALTYPE_LABELS = {sale:'فروش', mortgage:'رهن کامل', mortgage_rent:'رهن و اجاره', rent:'اجاره'};
+const STATUS_LABELS = {available:'موجود', reserved:'رزرو شده', done:'انجام شده'};
+const NEED_LABELS = {buy:'خریدار', sell:'فروشنده', rent:'مستأجر / موجر'};
+const FUNNEL_ORDER = ['lead','contacted','visit','negotiation','contract','won'];
+const FUNNEL_LABELS = {lead:'سرنخ', contacted:'تماس اولیه', visit:'بازدید ملک', negotiation:'مذاکره', contract:'عقد قرارداد', won:'معامله موفق', lost:'از دست رفته'};
+const FUNNEL_COLORS = {lead:'#5B8DC6', contacted:'#8E7BC6', visit:'#C6A15B', negotiation:'#C6935B', contract:'#3E9284', won:'#5FAE7B', lost:'#C1554A'};
+const STAGE_LABELS = {negotiation:'مذاکره', visit:'بازدید', contract:'در حال قرارداد', done:'نهایی‌شده'};
+const STAGE_COLORS = {negotiation:'#5B8DC6', visit:'#C6A15B', contract:'#3E9284', done:'#8AA476'};
+
+/* ============ STATE ============ */
+let DATA = { properties: [], leads: [], deals: [], settings:{commissionRate:2} };
+let activeTab = 'dashboard';
+let chatHistory = [];
+let propFilter = { q:'', category:'', dealType:'' };
+let leadFilter = { q:'', stage:'' };
+let filterPanelOpen = false;
+
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function fmtPrice(n){
+  n = Number(n)||0;
+  if(n===0) return '—';
+  if(n>=1e9) return (n/1e9).toFixed(1).replace(/\.0$/,'')+' میلیارد';
+  if(n>=1e7) return (n/1e6).toFixed(0)+' میلیون';
+  if(n>=1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'')+' میلیون';
+  return n.toLocaleString('fa-IR');
+}
+function toJalali(ts){
+  try{ return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'long',day:'numeric'}).format(new Date(ts)); }
+  catch(e){ return new Date(ts).toLocaleDateString('fa-IR'); }
+}
+function toJalaliShort(ts){
+  try{ return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(ts)); }
+  catch(e){ return new Date(ts).toLocaleDateString('fa-IR'); }
+}
+function toJalaliFull(ts){
+  try{ return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(new Date(ts)); }
+  catch(e){ return new Date(ts).toLocaleDateString('fa-IR'); }
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+function waLink(phone){
+  let d = String(phone||'').replace(/\D/g,'');
+  if(!d) return '';
+  if(d.startsWith('0')) d = '98'+d.slice(1);
+  else if(!d.startsWith('98')) d = '98'+d;
+  return 'https://wa.me/'+d;
+}
+function telLink(phone){ return 'tel:'+String(phone||'').replace(/\s/g,''); }
+function followUpStatus(dateStr){
+  if(!dateStr) return '';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const fu = new Date(dateStr); fu.setHours(0,0,0,0);
+  if(fu.getTime() < today.getTime()) return 'due';
+  if(fu.getTime() === today.getTime()) return 'today';
+  return 'upcoming';
+}
+function followUpJalali(dateStr){
+  if(!dateStr) return '';
+  return toJalaliShort(new Date(dateStr).getTime());
+}
+function escAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escapeHTML(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ============ PROPERTY PRICE DISPLAY ============ */
+function propPriceDisplay(p){
+  if(p.dealType==='sale') return {main:fmtPrice(p.price), sub:'قیمت کل'};
+  if(p.dealType==='mortgage') return {main:fmtPrice(p.deposit), sub:'رهن کامل'};
+  if(p.dealType==='mortgage_rent') return {main:fmtPrice(p.deposit)+' / '+fmtPrice(p.rent), sub:'رهن / اجاره'};
+  if(p.dealType==='rent') return {main:fmtPrice(p.rent), sub:'اجاره ماهانه'};
+  return {main:'—', sub:''};
+}
+
+/* ============ STORAGE ============ */
+const STORAGE_KEY = 'melkyar-crm-data';
+async function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ DATA = JSON.parse(raw); migrateData(); }
+    else { seedDemoData(); await saveData(); }
+  }catch(e){ console.error('load error', e); seedDemoData(); }
+  render();
+}
+async function saveData(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(DATA)); }
+  catch(e){ console.error('storage error', e); toast('خطا در ذخیره‌سازی — حافظه مرورگر پر است؟'); }
+}
+function migrateData(){
+  const now = Date.now();
+  if(!DATA.settings) DATA.settings = {commissionRate:2};
+  if(DATA.settings.commissionRate===undefined) DATA.settings.commissionRate = 2;
+  DATA.properties = (DATA.properties||[]).map(p=>{
+    if(!p.category) p.category = 'apartment';
+    if(!p.dealType) p.dealType = p.type==='rent' ? 'mortgage_rent' : 'sale';
+    if(p.status==='sold') p.status='done';
+    if(p.price===undefined) p.price = p.dealType==='sale' ? (p.price||0) : 0;
+    if(p.deposit===undefined) p.deposit = 0;
+    if(p.rent===undefined) p.rent = 0;
+    if(!p.createdAt) p.createdAt = now;
+    return p;
+  });
+  DATA.leads = (DATA.leads||[]).map(l=>{
+    if(l.stage==='new') l.stage='lead';
+    else if(l.stage==='negotiating') l.stage='negotiation';
+    else if(l.stage==='closed') l.stage='won';
+    if(!FUNNEL_LABELS[l.stage]) l.stage='lead';
+    if(!l.createdAt) l.createdAt = now;
+    if(l.nextFollowUp===undefined) l.nextFollowUp = '';
+    return l;
+  });
+  DATA.deals = (DATA.deals||[]).map(d=>{
+    if(!d.createdAt) d.createdAt = now;
+    return d;
+  });
+}
+function seedDemoData(){
+  const now = Date.now();
+  DATA.settings = {commissionRate:2};
+  DATA.properties = [
+    {id:uid(), createdAt:now, title:'آپارتمان ۱۱۰ متری سعادت‌آباد', category:'apartment', dealType:'sale', price:8500000000, deposit:0, rent:0, area:110, region:'سعادت‌آباد', status:'available', desc:'واحد نوساز، دو خوابه، پارکینگ و انباری، نمای رومی.'},
+    {id:uid(), createdAt:now, title:'ویلای دوبلکس لواسان', category:'villa', dealType:'sale', price:32000000000, deposit:0, rent:0, area:300, region:'لواسان', status:'reserved', desc:'ویلای دوبلکس با استخر و باغ ۵۰۰ متری.'},
+    {id:uid(), createdAt:now, title:'اجاره واحد اداری ولیعصر', category:'commercial', dealType:'mortgage_rent', price:0, deposit:300000000, rent:45000000, area:80, region:'ولیعصر', status:'available', desc:'مناسب دفتر کار، طبقه سوم، آسانسور.'},
+    {id:uid(), createdAt:now, title:'زمین کشاورزی ۲ هکتاری کرج', category:'agricultural', dealType:'sale', price:6000000000, deposit:0, rent:0, area:20000, region:'کرج', status:'available', desc:'دارای چاه آب و سند تک‌برگ.'}
+  ];
+  DATA.leads = [
+    {id:uid(), createdAt:now, name:'مهدی رضایی', phone:'09121234567', need:'buy', budget:9000000000, stage:'negotiation', notes:'دنبال آپارتمان دو خوابه در غرب تهران.', nextFollowUp:new Date().toISOString().slice(0,10)},
+    {id:uid(), createdAt:now, name:'شرکت آرتین', phone:'02133445566', need:'rent', budget:50000000, stage:'lead', notes:'نیاز به فضای اداری فوری.', nextFollowUp:''}
+  ];
+  DATA.deals = [
+    {id:uid(), createdAt:now, title:'فروش واحد سعادت‌آباد به آقای رضایی', value:8500000000, stage:'negotiation'}
+  ];
+}
+
+/* ============ TABS ============ */
+function switchTab(tab){
+  activeTab = tab;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  document.getElementById('fabBtn').style.display = (tab==='ai')?'none':'flex';
+  render();
+}
+
+/* ============ RENDER ROOT ============ */
+function render(){
+  const main = document.getElementById('main');
+  if(activeTab==='dashboard') main.innerHTML = renderDashboard();
+  else if(activeTab==='properties') main.innerHTML = renderProperties();
+  else if(activeTab==='leads') main.innerHTML = renderLeads();
+  else if(activeTab==='pipeline') main.innerHTML = renderPipeline();
+  else if(activeTab==='ai') { main.innerHTML=''; renderAI(main); return; }
+}
+
+/* ============ DASHBOARD ============ */
+function renderDashboard(){
+  const totalVal = DATA.properties.filter(p=>p.dealType==='sale').reduce((s,p)=>s+Number(p.price||0),0);
+  const activeLeads = DATA.leads.filter(l=>l.stage!=='won' && l.stage!=='lost').length;
+  const openDeals = DATA.deals.filter(d=>d.stage!=='done').length;
+  const rate = (DATA.settings && DATA.settings.commissionRate!==undefined) ? DATA.settings.commissionRate : 2;
+  const commission = Math.round(totalVal*(rate/100));
+
+  const catCounts = {};
+  DATA.properties.forEach(p=>{ catCounts[p.category]=(catCounts[p.category]||0)+1; });
+
+  const dueLeads = DATA.leads.filter(l=>l.nextFollowUp && (followUpStatus(l.nextFollowUp)==='due' || followUpStatus(l.nextFollowUp)==='today'));
+
+  return `
+    <div class="greet">
+      <div class="jdate">${toJalaliFull(Date.now())}</div>
+      <h2>سلام 👋 چشم‌انداز امروز</h2>
+      <p>خلاصه‌ی وضعیت پرونده‌های ملکی، مشتریان و قیف فروش شما.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="icon" style="background:var(--gold-glow);color:var(--gold);">🏠</div>
+        <div class="val">${DATA.properties.length}</div>
+        <div class="lbl">فایل ملکی</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:var(--teal-glow);color:var(--teal);">👥</div>
+        <div class="val">${activeLeads}</div>
+        <div class="lbl">سرنخ فعال</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:var(--red-glow);color:var(--red);">📑</div>
+        <div class="val">${openDeals}</div>
+        <div class="lbl">معامله در جریان</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:var(--blue-glow);color:var(--blue);">💰</div>
+        <div class="val" style="font-size:15px;">${fmtPrice(commission)}</div>
+        <div class="lbl">کمیسیون تخمینی</div>
+      </div>
+    </div>
+
+    ${DATA.properties.length? `
+    <div class="cat-row">
+      ${Object.keys(CATEGORY_LABELS).map(c=>`<div class="cat-pill">${CATEGORY_ICON[c]} <b>${catCounts[c]||0}</b> ${CATEGORY_LABELS[c]}</div>`).join('')}
+    </div>`:''}
+
+    ${dueLeads.length? `
+    <div class="section-title">پیگیری‌های امروز و عقب‌افتاده<span class="count">${dueLeads.length} مورد</span></div>
+    ${dueLeads.map(l=>{
+      const st = followUpStatus(l.nextFollowUp);
+      return `
+      <div class="followup-card" onclick="openLeadDetail('${l.id}')">
+        <div>
+          <div class="fu-name">${l.name}</div>
+          <div class="fu-sub">${FUNNEL_LABELS[l.stage]} · موعد: ${followUpJalali(l.nextFollowUp)}</div>
+        </div>
+        <span class="followup-badge ${st==='due'?'due':'today'}">${st==='due'?'عقب‌افتاده':'امروز'}</span>
+      </div>`;
+    }).join('')}
+    `:''}
+
+    <div class="ai-nudge">
+      <div class="dot">✦</div>
+      <div>
+        <h3>دستیار هوشمند املاک</h3>
+        <p>می‌تونم قیمت پیشنهادی بدم، توضیحات آگهی بنویسم، فایل رو با صدا ثبت کنم یا مشتری مناسب رو پیدا کنم.</p>
+        <button class="cta" onclick="switchTab('ai')">شروع گفتگو</button>
+      </div>
+    </div>
+
+    <div class="section-title">آخرین فایل‌ها<span class="count">${DATA.properties.length} مورد</span></div>
+    ${DATA.properties.slice(0,3).map(propCardHTML).join('') || emptyHTML('🏠','هنوز فایلی ثبت نشده','از دکمه + یک فایل جدید اضافه کنید.')}
+  `;
+}
+function emptyHTML(icon,title,sub){
+  return `<div class="empty"><div class="em-icon">${icon}</div><p><b>${title}</b><br>${sub}</p></div>`;
+}
+
+/* ============ PROPERTIES ============ */
+function propCardHTML(p){
+  const statusColor = p.status==='available'?'teal':p.status==='reserved'?'gold':'red';
+  const pd = propPriceDisplay(p);
+  return `
+  <div class="list-item" onclick="openPropertyDetail('${p.id}')">
+    <div class="li-top">
+      <div>
+        <div class="li-title">${p.title}</div>
+        <div class="li-sub">${CATEGORY_ICON[p.category]||''} ${CATEGORY_LABELS[p.category]||''} · ${p.region} · ${p.area} متر</div>
+      </div>
+      <div class="li-price">${pd.main}<small>${pd.sub}</small></div>
+    </div>
+    <div class="li-meta">
+      <span class="chip gold">${DEALTYPE_LABELS[p.dealType]||''}</span>
+      <span class="chip ${statusColor}">${STATUS_LABELS[p.status]}</span>
+    </div>
+    <div class="li-date">ثبت‌شده: ${toJalaliShort(p.createdAt||Date.now())}</div>
+  </div>`;
+}
+function applyPropertyFilter(list){
+  return list.filter(p=>{
+    if(propFilter.category && p.category!==propFilter.category) return false;
+    if(propFilter.dealType && p.dealType!==propFilter.dealType) return false;
+    if(propFilter.q){
+      const q = propFilter.q.toLowerCase();
+      const hay = (p.title+' '+p.region+' '+(p.desc||'')).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+function onPropSearch(v){ propFilter.q = v; renderListOnly(); }
+function onPropFilterChange(key, v){ propFilter[key] = v; renderListOnly(); }
+function toggleFilterPanel(id){
+  filterPanelOpen = !filterPanelOpen;
+  const panel = document.getElementById(id);
+  const btn = document.getElementById(id+'_btn');
+  if(panel) panel.classList.toggle('open', filterPanelOpen);
+  if(btn) btn.classList.toggle('active', filterPanelOpen);
+}
+function renderListOnly(){
+  const main = document.getElementById('main');
+  if(activeTab==='properties') main.innerHTML = renderProperties();
+  else if(activeTab==='leads') main.innerHTML = renderLeads();
+  // restore focus to search input after re-render
+  const active = activeTab==='properties' ? 'propSearchInput' : 'leadSearchInput';
+  const el = document.getElementById(active);
+  if(el){ const pos=el.value.length; el.focus(); el.setSelectionRange(pos,pos); }
+}
+function renderProperties(){
+  const filtered = applyPropertyFilter(DATA.properties).slice().sort((a,b)=>b.createdAt-a.createdAt);
+  return `
+    <div class="section-title">
+      لیست فایل‌های ملکی<span class="count">${DATA.properties.length} مورد</span>
+    </div>
+    <button class="ai-nudge" style="width:100%;cursor:pointer;text-align:right;border:1px solid var(--gold-dim);" onclick="openVoiceModal('property')">
+      <div class="dot">🎙️</div>
+      <div>
+        <h3>ثبت فایل با صدا</h3>
+        <p>نوع ملک، متراژ و قیمت را با صدا بگویید؛ هوش مصنوعی فرم را برایتان پر می‌کند.</p>
+      </div>
+    </button>
+    <div class="search-row">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="propSearchInput" value="${escAttr(propFilter.q)}" placeholder="جستجو در عنوان، منطقه یا توضیحات..." oninput="onPropSearch(this.value)">
+      </div>
+      <button class="filter-toggle-btn ${filterPanelOpen?'active':''}" id="propFilterPanel_btn" onclick="toggleFilterPanel('propFilterPanel')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      </button>
+    </div>
+    <div class="filter-panel ${filterPanelOpen?'open':''}" id="propFilterPanel">
+      <select onchange="onPropFilterChange('category', this.value)">
+        <option value="">همه دسته‌ها</option>
+        ${Object.keys(CATEGORY_LABELS).map(c=>`<option value="${c}" ${propFilter.category===c?'selected':''}>${CATEGORY_ICON[c]} ${CATEGORY_LABELS[c]}</option>`).join('')}
+      </select>
+      <select onchange="onPropFilterChange('dealType', this.value)">
+        <option value="">همه معاملات</option>
+        ${Object.keys(DEALTYPE_LABELS).map(k=>`<option value="${k}" ${propFilter.dealType===k?'selected':''}>${DEALTYPE_LABELS[k]}</option>`).join('')}
+      </select>
+    </div>
+    ${(propFilter.q||propFilter.category||propFilter.dealType)?`<div class="result-count">${filtered.length} نتیجه از ${DATA.properties.length} فایل</div>`:''}
+    ${filtered.map(propCardHTML).join('') || (DATA.properties.length ? emptyHTML('🔍','نتیجه‌ای یافت نشد','فیلترها یا عبارت جستجو را تغییر دهید.') : emptyHTML('🏠','هنوز فایلی ثبت نشده','با دکمه + یا ثبت صوتی اولین فایل را اضافه کنید.'))}
+  `;
+}
+
+function updateDealTypeFields(dt){
+  document.getElementById('wrap_price').style.display = dt==='sale' ? 'block':'none';
+  document.getElementById('wrap_deposit').style.display = (dt==='mortgage'||dt==='mortgage_rent') ? 'block':'none';
+  document.getElementById('wrap_rent').style.display = (dt==='rent'||dt==='mortgage_rent') ? 'block':'none';
+}
+function segSelectDealType(btn){
+  segSelect('seg_dealtype', btn);
+  updateDealTypeFields(btn.dataset.v);
+}
+
+function openPropertyModal(prefill){
+  prefill = prefill || {};
+  const dt = prefill.dealType || 'sale';
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>${prefill.fromAI?'تأیید فایل استخراج‌شده با AI':'افزودن فایل جدید'}</h2>
+    ${prefill.fromAI?'<div class="chip gold" style="margin-bottom:14px;display:inline-block;">✦ پیش‌نویس هوش مصنوعی — قبل از ذخیره بررسی کنید</div>':''}
+    <div class="field"><label>عنوان فایل</label><input id="f_title" value="${prefill.title?escAttr(prefill.title):''}" placeholder="مثلاً آپارتمان ۹۰ متری تهرانپارس"></div>
+
+    <div class="field">
+      <label>نوع ملک</label>
+      <select id="f_category">
+        ${Object.keys(CATEGORY_LABELS).map(c=>`<option value="${c}" ${prefill.category===c?'selected':''}>${CATEGORY_ICON[c]} ${CATEGORY_LABELS[c]}</option>`).join('')}
+      </select>
+    </div>
+
+    <div class="field">
+      <label>نوع معامله</label>
+      <div class="seg" id="seg_dealtype">
+        ${Object.keys(DEALTYPE_LABELS).map(k=>`<button class="${dt===k?'sel':''}" data-v="${k}" onclick="segSelectDealType(this)">${DEALTYPE_LABELS[k]}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="field" id="wrap_price" style="display:${dt==='sale'?'block':'none'};">
+      <label>قیمت کل (تومان)</label><input id="f_price" type="number" value="${prefill.price||''}" placeholder="8500000000">
+    </div>
+    <div class="field" id="wrap_deposit" style="display:${(dt==='mortgage'||dt==='mortgage_rent')?'block':'none'};">
+      <label>مبلغ رهن (تومان)</label><input id="f_deposit" type="number" value="${prefill.deposit||''}" placeholder="300000000">
+    </div>
+    <div class="field" id="wrap_rent" style="display:${(dt==='rent'||dt==='mortgage_rent')?'block':'none'};">
+      <label>اجاره ماهانه (تومان)</label><input id="f_rent" type="number" value="${prefill.rent||''}" placeholder="45000000">
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label>متراژ</label><input id="f_area" type="number" value="${prefill.area||''}" placeholder="110"></div>
+      <div class="field"><label>منطقه</label><input id="f_region" value="${prefill.region?escAttr(prefill.region):''}" placeholder="مثلاً سعادت‌آباد"></div>
+    </div>
+
+    <div class="field">
+      <label>وضعیت فایل</label>
+      <div class="seg" id="seg_status">
+        <button class="${(!prefill.status||prefill.status==='available')?'sel':''}" data-v="available" onclick="segSelect('seg_status',this)">موجود</button>
+        <button class="${prefill.status==='reserved'?'sel':''}" data-v="reserved" onclick="segSelect('seg_status',this)">رزرو شده</button>
+        <button class="${prefill.status==='done'?'sel':''}" data-v="done" onclick="segSelect('seg_status',this)">انجام شده</button>
+      </div>
+    </div>
+
+    <div class="field"><label>توضیحات</label><textarea id="f_desc" placeholder="ویژگی‌های ملک...">${prefill.desc?escAttr(prefill.desc):''}</textarea></div>
+
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">انصراف</button>
+      <button class="btn-primary" onclick="saveProperty('${prefill.id||''}')">ذخیره فایل</button>
+    </div>
+  `;
+  openModal();
+}
+async function saveProperty(editId){
+  const title = document.getElementById('f_title').value.trim();
+  if(!title){ toast('لطفاً عنوان فایل را وارد کنید'); return; }
+  const category = document.getElementById('f_category').value;
+  const dealType = document.querySelector('#seg_dealtype .sel').dataset.v;
+  const status = document.querySelector('#seg_status .sel').dataset.v;
+  const price = document.getElementById('f_price') ? (document.getElementById('f_price').value||0) : 0;
+  const deposit = document.getElementById('f_deposit') ? (document.getElementById('f_deposit').value||0) : 0;
+  const rent = document.getElementById('f_rent') ? (document.getElementById('f_rent').value||0) : 0;
+  const area = document.getElementById('f_area').value || 0;
+  const region = document.getElementById('f_region').value.trim();
+  const desc = document.getElementById('f_desc').value.trim();
+  if(editId){
+    const p = DATA.properties.find(x=>x.id===editId);
+    if(p) Object.assign(p, {title,category,dealType,status,price,deposit,rent,area,region,desc});
+  } else {
+    DATA.properties.unshift({id:uid(), createdAt:Date.now(), title, category, dealType, status, price, deposit, rent, area, region, desc});
+  }
+  await saveData();
+  closeModal(); render(); toast('فایل با موفقیت ذخیره شد');
+}
+function openPropertyDetail(id){
+  const p = DATA.properties.find(x=>x.id===id);
+  if(!p) return;
+  const pd = propPriceDisplay(p);
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>${p.title}</h2>
+    <div class="li-meta" style="margin-bottom:14px;">
+      <span class="chip gold">${CATEGORY_ICON[p.category]} ${CATEGORY_LABELS[p.category]}</span>
+      <span class="chip">${DEALTYPE_LABELS[p.dealType]}</span>
+      <span class="chip">${p.region}</span>
+      <span class="chip">${p.area} متر</span>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="li-price" style="font-size:19px;margin-bottom:2px;text-align:right;">${pd.main} <small style="font-size:11px;">تومان</small></div>
+      <div class="li-sub" style="margin-bottom:10px;">${pd.sub}</div>
+      <p style="font-size:12.5px;color:var(--text-dim);line-height:1.9;">${p.desc||'بدون توضیحات'}</p>
+      <div class="li-date" style="margin-top:12px;">تاریخ ثبت: ${toJalali(p.createdAt)}</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="deleteProperty('${p.id}')">حذف</button>
+      <button class="btn-ghost" onclick="openPropertyModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">ویرایش</button>
+      <button class="btn-primary" onclick="matchPropertyToLeads('${p.id}')">تطبیق با مشتریان</button>
+    </div>
+    <button class="btn-ghost" style="width:100%;margin-top:9px;" onclick="askAIAboutProperty('${p.id}')">تحلیل قیمت با هوش مصنوعی</button>
+  `;
+  openModal();
+}
+async function deleteProperty(id){
+  DATA.properties = DATA.properties.filter(p=>p.id!==id);
+  await saveData(); closeModal(); render(); toast('فایل حذف شد');
+}
+function askAIAboutProperty(id){
+  const p = DATA.properties.find(x=>x.id===id);
+  closeModal();
+  switchTab('ai');
+  const pd = propPriceDisplay(p);
+  sendToAI(`قیمت و وضعیت رقابتی این فایل رو تحلیل کن و اگر لازمه توضیحات آگهی بهتری پیشنهاد بده: «${p.title}»، نوع ملک: ${CATEGORY_LABELS[p.category]}، در ${p.region}، ${p.area} متر، نوع معامله: ${DEALTYPE_LABELS[p.dealType]}، ${pd.sub}: ${pd.main} تومان. توضیحات فعلی: ${p.desc}`);
+}
+
+/* ============ LEADS ============ */
+function funnelChipColor(stage){
+  const c = FUNNEL_COLORS[stage];
+  if(stage==='won') return 'teal';
+  if(stage==='lost') return 'red';
+  if(stage==='lead') return 'blue';
+  if(stage==='contacted') return 'purple';
+  return 'gold';
+}
+function leadCardHTML(l){
+  const fu = followUpStatus(l.nextFollowUp);
+  return `
+  <div class="list-item">
+    <div onclick="openLeadDetail('${l.id}')">
+      <div class="li-top">
+        <div>
+          <div class="li-title">${l.name}</div>
+          <div class="li-sub">${l.phone||'بدون شماره'}</div>
+        </div>
+        <div class="li-price" style="font-size:12px;color:var(--text-dim);">${fmtPrice(l.budget)}</div>
+      </div>
+      <div class="li-meta">
+        <span class="chip">${NEED_LABELS[l.need]||l.need}</span>
+        <span class="chip ${funnelChipColor(l.stage)}">${FUNNEL_LABELS[l.stage]}</span>
+        ${fu?`<span class="followup-badge ${fu==='due'?'due':fu==='today'?'today':''}">${fu==='due'?'پیگیری عقب‌افتاده':fu==='today'?'پیگیری امروز':'پیگیری: '+followUpJalali(l.nextFollowUp)}</span>`:''}
+      </div>
+      <div class="li-date">ثبت‌شده: ${toJalaliShort(l.createdAt||Date.now())}</div>
+    </div>
+    ${l.phone?`
+    <div class="quick-actions" onclick="event.stopPropagation()">
+      <a class="qa-btn call" href="${telLink(l.phone)}">📞 تماس</a>
+      <a class="qa-btn wa" href="${waLink(l.phone)}" target="_blank" rel="noopener">💬 واتس‌اپ</a>
+    </div>`:''}
+  </div>`;
+}
+function applyLeadFilter(list){
+  return list.filter(l=>{
+    if(leadFilter.stage && l.stage!==leadFilter.stage) return false;
+    if(leadFilter.q){
+      const q = leadFilter.q.toLowerCase();
+      const hay = (l.name+' '+(l.phone||'')+' '+(l.notes||'')).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+function onLeadSearch(v){ leadFilter.q = v; renderListOnly(); }
+function onLeadFilterChange(key, v){ leadFilter[key] = v; renderListOnly(); }
+function renderLeads(){
+  const filtered = applyLeadFilter(DATA.leads).slice().sort((a,b)=>b.createdAt-a.createdAt);
+  return `
+    <div class="section-title">مشتریان و سرنخ‌ها<span class="count">${DATA.leads.length} نفر</span></div>
+    <button class="ai-nudge" style="width:100%;cursor:pointer;text-align:right;border:1px solid var(--gold-dim);" onclick="openVoiceModal('lead')">
+      <div class="dot">🎙️</div>
+      <div>
+        <h3>ثبت مشتری با صدا</h3>
+        <p>درباره مشتری و نیازش صحبت کنید؛ هوش مصنوعی فرم را پر می‌کند.</p>
+      </div>
+    </button>
+    <div class="search-row">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="leadSearchInput" value="${escAttr(leadFilter.q)}" placeholder="جستجو در نام، شماره یا یادداشت..." oninput="onLeadSearch(this.value)">
+      </div>
+      <button class="filter-toggle-btn ${filterPanelOpen?'active':''}" id="leadFilterPanel_btn" onclick="toggleFilterPanel('leadFilterPanel')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      </button>
+    </div>
+    <div class="filter-panel ${filterPanelOpen?'open':''}" id="leadFilterPanel">
+      <select onchange="onLeadFilterChange('stage', this.value)" style="min-width:100%;">
+        <option value="">همه مراحل قیف فروش</option>
+        ${FUNNEL_ORDER.concat(['lost']).map(s=>`<option value="${s}" ${leadFilter.stage===s?'selected':''}>${FUNNEL_LABELS[s]}</option>`).join('')}
+      </select>
+    </div>
+    ${(leadFilter.q||leadFilter.stage)?`<div class="result-count">${filtered.length} نتیجه از ${DATA.leads.length} مشتری</div>`:''}
+    ${filtered.map(leadCardHTML).join('') || (DATA.leads.length ? emptyHTML('🔍','نتیجه‌ای یافت نشد','فیلترها یا عبارت جستجو را تغییر دهید.') : emptyHTML('👥','هنوز مشتری ثبت نشده','با دکمه + یا ثبت صوتی اولین مشتری را اضافه کنید.'))}
+  `;
+}
+function openLeadModal(prefill){
+  prefill = prefill || {};
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>${prefill.fromAI?'تأیید مشتری استخراج‌شده با AI':'افزودن مشتری جدید'}</h2>
+    ${prefill.fromAI?'<div class="chip gold" style="margin-bottom:14px;display:inline-block;">✦ پیش‌نویس هوش مصنوعی — قبل از ذخیره بررسی کنید</div>':''}
+    <div class="field"><label>نام مشتری</label><input id="l_name" value="${prefill.name?escAttr(prefill.name):''}" placeholder="مثلاً مهدی رضایی"></div>
+    <div class="field"><label>شماره تماس</label><input id="l_phone" value="${prefill.phone?escAttr(prefill.phone):''}" placeholder="0912xxxxxxx"></div>
+    <div class="field">
+      <label>نوع نیاز</label>
+      <div class="seg" id="seg_need">
+        <button class="${(!prefill.need||prefill.need==='buy')?'sel':''}" data-v="buy" onclick="segSelect('seg_need',this)">خرید</button>
+        <button class="${prefill.need==='sell'?'sel':''}" data-v="sell" onclick="segSelect('seg_need',this)">فروش</button>
+        <button class="${prefill.need==='rent'?'sel':''}" data-v="rent" onclick="segSelect('seg_need',this)">اجاره</button>
+      </div>
+    </div>
+    <div class="field"><label>بودجه تقریبی (تومان)</label><input id="l_budget" type="number" value="${prefill.budget||''}" placeholder="9000000000"></div>
+    <div class="field">
+      <label>مرحله در قیف فروش</label>
+      <select id="l_stage">
+        ${FUNNEL_ORDER.concat(['lost']).map(s=>`<option value="${s}" ${(prefill.stage||'lead')===s?'selected':''}>${FUNNEL_LABELS[s]}</option>`).join('')}
+      </select>
+    </div>
+    <div class="field"><label>تاریخ پیگیری بعدی (اختیاری)</label><input id="l_followup" type="date" value="${prefill.nextFollowUp||''}"></div>
+    <div class="field"><label>یادداشت</label><textarea id="l_notes" placeholder="نکات مهم درباره مشتری...">${prefill.notes?escAttr(prefill.notes):''}</textarea></div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">انصراف</button>
+      <button class="btn-primary" onclick="saveLead('${prefill.id||''}')">ذخیره مشتری</button>
+    </div>
+  `;
+  openModal();
+}
+async function saveLead(editId){
+  const name = document.getElementById('l_name').value.trim();
+  if(!name){ toast('لطفاً نام مشتری را وارد کنید'); return; }
+  const phone = document.getElementById('l_phone').value.trim();
+  const need = document.querySelector('#seg_need .sel').dataset.v;
+  const budget = document.getElementById('l_budget').value || 0;
+  const stage = document.getElementById('l_stage').value;
+  const nextFollowUp = document.getElementById('l_followup').value || '';
+  const notes = document.getElementById('l_notes').value.trim();
+  if(editId){
+    const l = DATA.leads.find(x=>x.id===editId);
+    if(l) Object.assign(l, {name,phone,need,budget,stage,nextFollowUp,notes});
+  } else {
+    DATA.leads.unshift({id:uid(), createdAt:Date.now(), name, phone, need, budget, stage, nextFollowUp, notes});
+  }
+  await saveData();
+  closeModal(); render(); toast('مشتری با موفقیت ذخیره شد');
+}
+function openLeadDetail(id){
+  const l = DATA.leads.find(x=>x.id===id);
+  if(!l) return;
+  const fu = followUpStatus(l.nextFollowUp);
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>${l.name}</h2>
+    <div class="li-meta" style="margin-bottom:14px;">
+      <span class="chip gold">${l.phone||'بدون شماره'}</span>
+      <span class="chip">بودجه: ${fmtPrice(l.budget)}</span>
+      <span class="chip ${funnelChipColor(l.stage)}">${FUNNEL_LABELS[l.stage]}</span>
+      ${l.nextFollowUp?`<span class="followup-badge ${fu==='due'?'due':fu==='today'?'today':''}">پیگیری: ${followUpJalali(l.nextFollowUp)}</span>`:''}
+    </div>
+    ${l.phone?`
+    <div class="quick-actions" style="margin-bottom:14px;">
+      <a class="qa-btn call" href="${telLink(l.phone)}">📞 تماس بگیر</a>
+      <a class="qa-btn wa" href="${waLink(l.phone)}" target="_blank" rel="noopener">💬 پیام واتس‌اپ</a>
+    </div>`:''}
+    <div class="card" style="margin-bottom:14px;">
+      <p style="font-size:12.5px;color:var(--text-dim);line-height:1.9;">${l.notes||'بدون یادداشت'}</p>
+      <div class="li-date" style="margin-top:12px;">تاریخ ثبت: ${toJalali(l.createdAt)}</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="deleteLead('${l.id}')">حذف</button>
+      <button class="btn-ghost" onclick="openLeadModal(${JSON.stringify(l).replace(/"/g,'&quot;')})">ویرایش</button>
+      <button class="btn-primary" onclick="matchLeadToProperties('${l.id}')">تطبیق با فایل‌ها</button>
+    </div>
+    <button class="btn-ghost" style="width:100%;margin-top:9px;" onclick="draftMessageForLead('${l.id}')">پیش‌نویس پیام با AI</button>
+  `;
+  openModal();
+}
+async function deleteLead(id){
+  DATA.leads = DATA.leads.filter(l=>l.id!==id);
+  await saveData(); closeModal(); render(); toast('مشتری حذف شد');
+}
+function draftMessageForLead(id){
+  const l = DATA.leads.find(x=>x.id===id);
+  closeModal();
+  switchTab('ai');
+  sendToAI(`یک پیام کوتاه، محترمانه و حرفه‌ای برای واتس‌اپ بنویس خطاب به مشتری «${l.name}» که به دنبال ${NEED_LABELS[l.need]} با بودجه تقریبی ${l.budget} تومان است و در مرحله «${FUNNEL_LABELS[l.stage]}» قیف فروش قرار دارد. یادداشت من درباره او: ${l.notes}`);
+}
+
+/* ============ PIPELINE: FUNNEL + DEALS ============ */
+function renderPipeline(){
+  const counts = {};
+  FUNNEL_ORDER.forEach(s=>counts[s]=0);
+  let lostCount = 0;
+  DATA.leads.forEach(l=>{ if(l.stage==='lost') lostCount++; else if(counts[l.stage]!==undefined) counts[l.stage]++; });
+
+  // funnel is cumulative-style: show how many are AT or PAST each stage for a realistic funnel shape
+  const cum = {};
+  let running = DATA.leads.filter(l=>l.stage!=='lost').length;
+  FUNNEL_ORDER.forEach((s,i)=>{
+    cum[s] = DATA.leads.filter(l=>l.stage!=='lost' && FUNNEL_ORDER.indexOf(l.stage) >= i).length;
+  });
+  const base = cum[FUNNEL_ORDER[0]] || 0;
+
+  let funnelHTML = `<div class="section-title">قیف فروش<span class="count">${DATA.leads.length} سرنخ کل</span></div><div class="funnel-wrap">`;
+  FUNNEL_ORDER.forEach((s,i)=>{
+    const val = cum[s];
+    const pct = base>0 ? Math.round((val/base)*100) : 0;
+    const prevVal = i>0 ? cum[FUNNEL_ORDER[i-1]] : val;
+    const conv = (i>0 && prevVal>0) ? Math.round((val/prevVal)*100) : null;
+    funnelHTML += `
+      <div class="funnel-row">
+        <div class="funnel-top"><b>${FUNNEL_LABELS[s]}</b><span class="fc">${val} نفر</span></div>
+        <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:${pct}%;background:${FUNNEL_COLORS[s]};"></div></div>
+        ${conv!==null?`<div class="funnel-conv">نرخ عبور از مرحله قبل: ${conv}%</div>`:''}
+      </div>`;
+  });
+  funnelHTML += `
+    <div class="funnel-lost">
+      <span>از دست رفته</span><b>${lostCount} سرنخ</b>
+    </div>
+  </div>`;
+
+  const stages = ['negotiation','visit','contract','done'];
+  let dealsHTML = `<div class="section-title">پرونده‌های در حال معامله<span class="count">${DATA.deals.length} پرونده</span></div>`;
+  if(DATA.deals.length===0){
+    dealsHTML += emptyHTML('📑','هنوز معامله‌ای ثبت نشده','با دکمه + یک معامله جدید بسازید.');
+  } else {
+    stages.forEach(st=>{
+      const items = DATA.deals.filter(d=>d.stage===st);
+      if(items.length===0) return;
+      dealsHTML += `
+        <div class="kanban-col">
+          <div class="kanban-head">
+            <span class="dot2" style="background:${STAGE_COLORS[st]}"></span>
+            <h4>${STAGE_LABELS[st]}</h4>
+            <span>${items.length} مورد</span>
+          </div>
+          ${items.map(d=>{
+            const next = stages[stages.indexOf(st)+1];
+            return `
+            <div class="deal-card">
+              <div class="dt">${d.title}</div>
+              <div class="dm">ارزش تخمینی: ${fmtPrice(d.value)} · ثبت: ${toJalaliShort(d.createdAt||Date.now())}</div>
+              <div class="df">
+                <button class="btn-ghost" style="padding:5px 10px;font-size:10.5px;" onclick="deleteDeal('${d.id}')">حذف</button>
+                ${next?`<button class="move-btn" onclick="moveDeal('${d.id}','${next}')">انتقال به «${STAGE_LABELS[next]}» ←</button>`:'<span class="chip teal">تکمیل شده ✓</span>'}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>`;
+    });
+  }
+
+  return funnelHTML + dealsHTML;
+}
+function openDealModal(){
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>ثبت معامله جدید</h2>
+    <div class="field"><label>عنوان معامله</label><input id="d_title" placeholder="مثلاً فروش واحد سعادت‌آباد"></div>
+    <div class="field"><label>ارزش تخمینی (تومان)</label><input id="d_value" type="number" placeholder="8500000000"></div>
+    <div class="field">
+      <label>مرحله فعلی</label>
+      <div class="seg" id="seg_dealstage">
+        <button class="sel" data-v="negotiation" onclick="segSelect('seg_dealstage',this)">مذاکره</button>
+        <button data-v="visit" onclick="segSelect('seg_dealstage',this)">بازدید</button>
+        <button data-v="contract" onclick="segSelect('seg_dealstage',this)">قرارداد</button>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">انصراف</button>
+      <button class="btn-primary" onclick="saveDeal()">ذخیره معامله</button>
+    </div>
+  `;
+  openModal();
+}
+async function saveDeal(){
+  const title = document.getElementById('d_title').value.trim();
+  if(!title){ toast('لطفاً عنوان معامله را وارد کنید'); return; }
+  const value = document.getElementById('d_value').value || 0;
+  const stage = document.querySelector('#seg_dealstage .sel').dataset.v;
+  DATA.deals.unshift({id:uid(), createdAt:Date.now(), title, value, stage});
+  await saveData(); closeModal(); render(); toast('معامله ثبت شد');
+}
+async function moveDeal(id, next){
+  const d = DATA.deals.find(x=>x.id===id);
+  if(d){ d.stage = next; await saveData(); render(); toast('مرحله معامله به‌روزرسانی شد'); }
+}
+async function deleteDeal(id){
+  DATA.deals = DATA.deals.filter(d=>d.id!==id);
+  await saveData(); render(); toast('معامله حذف شد');
+}
+
+/* ============ SETTINGS / BACKUP ============ */
+const API_KEY_STORAGE = 'melkyar-anthropic-key';
+function getApiKey(){
+  try{ return localStorage.getItem(API_KEY_STORAGE) || ''; }catch(e){ return ''; }
+}
+function saveApiKeyFromInput(){
+  const v = document.getElementById('s_apikey').value.trim();
+  if(!v){ toast('کلید را وارد کنید'); return; }
+  try{ localStorage.setItem(API_KEY_STORAGE, v); toast('کلید ذخیره شد'); openSettingsModal(); }
+  catch(e){ toast('خطا در ذخیره کلید'); }
+}
+function clearApiKey(){
+  try{ localStorage.removeItem(API_KEY_STORAGE); toast('کلید حذف شد'); openSettingsModal(); }
+  catch(e){}
+}
+function aiHeaders(){
+  return {
+    "Content-Type": "application/json",
+    "x-api-key": getApiKey(),
+    "anthropic-version": "2023-06-01",
+    "anthropic-dangerous-direct-browser-access": "true"
+  };
+}
+function handleAiHttpError(data){
+  const errType = data && data.error && data.error.type;
+  const errMsg = (data && data.error && data.error.message) || '';
+  if(errType==='authentication_error' || /api.?key/i.test(errMsg)){
+    toast('کلید API نامعتبر است — در تنظیمات بررسی کنید');
+    noApiKeyPrompt();
+  } else if(errType==='rate_limit_error'){
+    toast('محدودیت درخواست API — کمی صبر کنید و دوباره تلاش کنید');
+  } else if(errType==='invalid_request_error' && /credit|billing/i.test(errMsg)){
+    toast('اعتبار حساب API کافی نیست');
+  } else {
+    toast('خطا در ارتباط با هوش مصنوعی: ' + (errMsg || 'نامشخص'));
+  }
+}
+function noApiKeyPrompt(){
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>نیاز به کلید API</h2>
+    <p style="font-size:12.5px;color:var(--text-dim);line-height:1.9;margin-bottom:16px;">
+      برای استفاده از هوش مصنوعی روی گوشی شما (خارج از سایت Claude)، ابتدا باید کلید API خودتان را در تنظیمات وارد کنید.
+    </p>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">بعداً</button>
+      <button class="btn-primary" onclick="openSettingsModal()">رفتن به تنظیمات</button>
+    </div>
+  `;
+  openModal();
+}
+function openSettingsModal(){
+  const rate = (DATA.settings && DATA.settings.commissionRate!==undefined) ? DATA.settings.commissionRate : 2;
+  const savedKey = getApiKey();
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>تنظیمات و پشتیبان‌گیری</h2>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="si-title" style="margin-bottom:4px;">🔑 کلید API هوش مصنوعی (Claude)</div>
+      <div class="si-sub" style="margin-bottom:10px;line-height:1.8;">برای فعال بودن دستیار هوشمند، ثبت با صدا و تطبیق فایل‌ها روی گوشی شما (خارج از سایت Claude)، کلید API خودتان از console.anthropic.com را اینجا وارد کنید. این کلید فقط روی همین گوشی و در همین مرورگر ذخیره می‌شود و به‌جای دیگری ارسال نمی‌شود.</div>
+      <div class="field" style="margin-bottom:8px;">
+        <input type="password" id="s_apikey" value="${savedKey?escAttr(savedKey):''}" placeholder="sk-ant-api03-...">
+      </div>
+      <div class="modal-actions" style="margin-top:0;">
+        <button class="btn-ghost" onclick="clearApiKey()">حذف کلید</button>
+        <button class="btn-primary" onclick="saveApiKeyFromInput()">ذخیره کلید</button>
+      </div>
+      <div class="si-sub" style="margin-top:10px;">${savedKey?'✅ کلید ذخیره‌شده و آماده استفاده است.':'⚠️ بدون کلید، بخش‌های هوش مصنوعی کار نمی‌کنند.'}</div>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="settings-item">
+        <div>
+          <div class="si-title">درصد کمیسیون</div>
+          <div class="si-sub">برای محاسبه کمیسیون تخمینی در داشبورد</div>
+        </div>
+        <input type="number" id="s_commission" value="${rate}" step="0.1" min="0" max="100" onchange="updateCommissionRate(this.value)">
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="settings-item" style="cursor:pointer;" onclick="exportData()">
+        <div>
+          <div class="si-title">خروجی گرفتن از داده‌ها</div>
+          <div class="si-sub">دانلود فایل پشتیبان JSON از همه فایل‌ها، مشتریان و معاملات</div>
+        </div>
+        <span style="font-size:18px;">⬇️</span>
+      </div>
+      <div class="settings-item" style="cursor:pointer;" onclick="document.getElementById('importFileInput').click()">
+        <div>
+          <div class="si-title">بازیابی از فایل پشتیبان</div>
+          <div class="si-sub">جایگزینی داده‌های فعلی با یک فایل JSON</div>
+        </div>
+        <span style="font-size:18px;">⬆️</span>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="settings-item" style="cursor:pointer;border-bottom:none;" onclick="confirmResetData()">
+        <div>
+          <div class="si-title" style="color:var(--red);">پاک‌کردن همه داده‌ها</div>
+          <div class="si-sub">این عمل قابل بازگشت نیست</div>
+        </div>
+        <span style="font-size:18px;">🗑️</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" style="width:100%;" onclick="closeModal()">بستن</button>
+    </div>
+  `;
+  openModal();
+}
+async function updateCommissionRate(v){
+  if(!DATA.settings) DATA.settings = {};
+  DATA.settings.commissionRate = parseFloat(v) || 0;
+  await saveData();
+  toast('درصد کمیسیون به‌روزرسانی شد');
+}
+function exportData(){
+  try{
+    const payload = JSON.stringify(DATA, null, 2);
+    const blob = new Blob([payload], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const dateTag = toJalaliShort(Date.now()).replace(/\//g,'-');
+    a.href = url;
+    a.download = `melkyar-backup-${dateTag}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 3000);
+    toast('فایل پشتیبان دانلود شد');
+  }catch(e){
+    console.error(e);
+    toast('خطا در تهیه فایل پشتیبان');
+  }
+}
+function confirmResetData(){
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>پاک‌کردن همه داده‌ها</h2>
+    <p style="font-size:12.5px;color:var(--text-dim);line-height:1.9;margin-bottom:16px;">
+      همه فایل‌های ملکی، مشتریان و معاملات برای همیشه حذف می‌شوند. پیشنهاد می‌شود قبل از این کار یک خروجی پشتیبان بگیرید. آیا مطمئن هستید؟
+    </p>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="openSettingsModal()">انصراف</button>
+      <button class="btn-primary" style="background:var(--red);" onclick="resetAllData()">بله، پاک کن</button>
+    </div>
+  `;
+}
+async function resetAllData(){
+  DATA = { properties: [], leads: [], deals: [], settings:{commissionRate:2} };
+  await saveData();
+  closeModal(); switchTab('dashboard'); toast('همه داده‌ها پاک شد');
+}
+document.getElementById('importFileInput').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async function(ev){
+    try{
+      const parsed = JSON.parse(ev.target.result);
+      if(!parsed || typeof parsed !== 'object') throw new Error('invalid');
+      DATA = {
+        properties: Array.isArray(parsed.properties) ? parsed.properties : [],
+        leads: Array.isArray(parsed.leads) ? parsed.leads : [],
+        deals: Array.isArray(parsed.deals) ? parsed.deals : [],
+        settings: parsed.settings || {commissionRate:2}
+      };
+      migrateData();
+      await saveData();
+      closeModal(); switchTab('dashboard');
+      toast('داده‌ها با موفقیت بازیابی شد');
+    }catch(err){
+      console.error(err);
+      toast('فایل پشتیبان نامعتبر است');
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+});
+
+/* ============ MODAL HELPERS ============ */
+function openModal(){ document.getElementById('modalOverlay').classList.add('open'); }
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+document.getElementById('modalOverlay').addEventListener('click', e=>{
+  if(e.target.id==='modalOverlay') closeModal();
+});
+function segSelect(groupId, btn){
+  document.getElementById(groupId).querySelectorAll('button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+/* ============ FAB ============ */
+document.getElementById('fabBtn').addEventListener('click', ()=>{
+  if(activeTab==='properties') openPropertyModal();
+  else if(activeTab==='leads') openLeadModal();
+  else if(activeTab==='pipeline') openDealModal();
+  else openPropertyModal();
+});
+
+/* ============ VOICE ENTRY (AI) ============ */
+let recognizer = null;
+let voiceTranscript = '';
+let voiceKind = 'property';
+
+function getRecognizer(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) return null;
+  const r = new SR();
+  r.lang = 'fa-IR';
+  r.continuous = true;
+  r.interimResults = true;
+  return r;
+}
+
+function openVoiceModal(kind){
+  voiceKind = kind;
+  voiceTranscript = '';
+  const body = document.getElementById('modalBody');
+  const supported = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  body.innerHTML = `
+    <h2>${kind==='property'?'ثبت فایل ملکی با صدا':'ثبت مشتری با صدا'}</h2>
+    <div class="voice-stage">
+      <button class="mic-big" id="micBtn" onclick="toggleRecording()">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M9 22h6"/></svg>
+      </button>
+      <div class="voice-status" id="voiceStatus">${supported?'برای شروع، روی میکروفون ضربه بزنید و '+(kind==='property'?'نوع، متراژ و قیمت ملک':'مشخصات و نیاز مشتری')+' را بگویید.':'مرورگر شما از تشخیص گفتار پشتیبانی نمی‌کند؛ متن را تایپ کنید.'}</div>
+      <div class="voice-transcript placeholder" id="voiceTranscriptBox">${kind==='property'?'مثلاً: یک آپارتمان هفتاد متری تو منطقه پونک برای فروش دارم، قیمتش پنج میلیارد و دویست میلیون تومانه، طبقه سوم و نوساز است...':'مثلاً: آقای احمدی دنبال یک واحد اجاره‌ای تو غرب تهران هست، بودجه‌اش حدود چهل میلیون تومان اجاره ماهانه است...'}</div>
+      <textarea id="voiceManualInput" style="display:none;width:100%;min-height:70px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;color:var(--text);font-family:inherit;font-size:13px;margin-bottom:14px;" placeholder="متن را اینجا بنویسید..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">انصراف</button>
+      <button class="btn-primary" id="voiceSubmitBtn" onclick="submitVoice()" disabled>استخراج با هوش مصنوعی</button>
+    </div>
+  `;
+  if(!supported){
+    document.getElementById('micBtn').style.display='none';
+    const ta = document.getElementById('voiceManualInput');
+    ta.style.display='block';
+    document.getElementById('voiceTranscriptBox').style.display='none';
+    ta.addEventListener('input', ()=>{
+      voiceTranscript = ta.value.trim();
+      document.getElementById('voiceSubmitBtn').disabled = !voiceTranscript;
+    });
+  }
+  openModal();
+}
+
+function toggleRecording(){
+  const micBtn = document.getElementById('micBtn');
+  const statusEl = document.getElementById('voiceStatus');
+  const box = document.getElementById('voiceTranscriptBox');
+
+  if(recognizer){
+    recognizer.stop();
+    recognizer = null;
+    micBtn.classList.remove('rec');
+    statusEl.textContent = 'ضبط متوقف شد. متن زیر را بررسی و سپس ثبت کنید.';
+    return;
+  }
+  recognizer = getRecognizer();
+  if(!recognizer){ toast('تشخیص گفتار پشتیبانی نمی‌شود'); return; }
+
+  micBtn.classList.add('rec');
+  statusEl.textContent = 'در حال شنیدن... صحبت کنید';
+  box.classList.remove('placeholder');
+  box.textContent = '';
+
+  recognizer.onresult = (e)=>{
+    let finalText = voiceTranscript;
+    let interim = '';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const t = e.results[i][0].transcript;
+      if(e.results[i].isFinal) finalText += t + ' ';
+      else interim += t;
+    }
+    voiceTranscript = finalText;
+    box.textContent = finalText + interim;
+    document.getElementById('voiceSubmitBtn').disabled = !finalText.trim();
+  };
+  recognizer.onerror = ()=>{
+    micBtn.classList.remove('rec');
+    statusEl.textContent = 'خطا در دریافت صدا. دوباره تلاش کنید یا متن را تایپ کنید.';
+  };
+  recognizer.onend = ()=>{
+    micBtn.classList.remove('rec');
+    if(recognizer) statusEl.textContent = 'ضبط متوقف شد. متن زیر را بررسی و سپس ثبت کنید.';
+  };
+  recognizer.start();
+}
+
+async function submitVoice(){
+  const text = voiceTranscript.trim();
+  if(!text){ toast('ابتدا متنی ضبط یا تایپ کنید'); return; }
+  if(!getApiKey()){ noApiKeyPrompt(); return; }
+  const btn = document.getElementById('voiceSubmitBtn');
+  btn.disabled = true; btn.textContent = 'در حال تحلیل با AI...';
+
+  const schema = voiceKind==='property'
+    ? `{"title": "عنوان کوتاه ملک", "category": "یکی از: apartment, villa, land, commercial, industrial, agricultural", "dealType": "یکی از: sale, mortgage, mortgage_rent, rent", "price": "عدد قیمت کل به تومان بدون کاما (فقط اگر dealType برابر sale است، وگرنه صفر)", "deposit": "عدد مبلغ رهن به تومان (فقط اگر dealType مربوط به رهن است، وگرنه صفر)", "rent": "عدد اجاره ماهانه به تومان (فقط اگر dealType مربوط به اجاره است، وگرنه صفر)", "area": عدد متراژ, "region": "نام منطقه", "status": "available یا reserved یا done", "desc": "خلاصه ویژگی‌های ملک در یک تا دو جمله"}`
+    : `{"name": "نام مشتری", "phone": "شماره تماس در صورت وجود وگرنه خالی", "need": "buy یا sell یا rent", "budget": عدد بودجه تقریبی به تومان بدون کاما, "stage": "lead", "notes": "خلاصه نیاز و نکات مهم مشتری"}`;
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: aiHeaders(),
+      body: JSON.stringify({
+        model: "claude-sonnet-5",
+        max_tokens: 500,
+        system: `از متن گفتاری فارسی زیر، اطلاعات را دقیقاً در قالب این JSON استخراج کن. فقط و فقط یک شیء JSON خام برگردان، بدون هیچ توضیح، متن اضافه یا بک‌تیک. اگر مقداری در متن نبود، بهترین حدس منطقی را بزن یا مقدار خالی/صفر بگذار. قالب مورد نیاز: ${schema}`,
+        messages: [{role:'user', content: text}]
+      })
+    });
+    const data = await response.json();
+    if(!response.ok){ btn.disabled=false; btn.textContent='استخراج با هوش مصنوعی'; handleAiHttpError(data); return; }
+    let raw = (data.content||[]).map(c=>c.text||'').join('').trim();
+    const match = raw.match(/\{[\s\S]*\}/);
+    if(!match) throw new Error('no json');
+    const parsed = JSON.parse(match[0]);
+    parsed.fromAI = true;
+    closeModal();
+    if(voiceKind==='property') openPropertyModal(parsed);
+    else openLeadModal(parsed);
+    toast('اطلاعات استخراج شد — لطفاً قبل از ذخیره بررسی کنید');
+  }catch(e){
+    console.error(e);
+    btn.disabled=false; btn.textContent='استخراج با هوش مصنوعی';
+    toast('استخراج اطلاعات ناموفق بود، دوباره تلاش کنید');
+  }
+}
+
+/* ============ AI MATCHING ============ */
+async function matchLeadToProperties(leadId){
+  const l = DATA.leads.find(x=>x.id===leadId);
+  if(!l) return;
+  if(DATA.properties.length===0){ toast('ابتدا حداقل یک فایل ثبت کنید'); return; }
+  if(!getApiKey()){ noApiKeyPrompt(); return; }
+  renderMatchLoading(`در حال یافتن بهترین فایل برای ${l.name}...`);
+  const propList = DATA.properties.map((p,i)=>`${i+1}. «${p.title}» | نوع ملک: ${CATEGORY_LABELS[p.category]} | منطقه: ${p.region} | متراژ: ${p.area} | نوع معامله: ${DEALTYPE_LABELS[p.dealType]} | قیمت کل: ${p.price} | رهن: ${p.deposit} | اجاره: ${p.rent} | وضعیت: ${STATUS_LABELS[p.status]} | توضیحات: ${p.desc}`).join('\n');
+  const prompt = `این مشتری را با بهترین گزینه‌ها از لیست فایل‌های ملکی تطبیق بده:
+مشتری: «${l.name}»، نیاز: ${NEED_LABELS[l.need]}، بودجه تقریبی: ${l.budget} تومان، یادداشت: ${l.notes}
+
+لیست فایل‌ها:
+${propList}
+
+خروجی را فقط به صورت آرایه JSON بده، هر آیتم شامل: {"property_index": شماره فایل از لیست بالا (عدد), "score": عدد بین ۰ تا ۱۰۰ درصد تطابق, "reason": "دلیل کوتاه تطابق در یک جمله فارسی"}. فقط ۱ تا ۳ بهترین گزینه را با بیشترین امتیاز برگردان، بدون هیچ متن اضافه یا بک‌تیک.`;
+  await runMatchAI(prompt, (parsedArr)=>{
+    const results = parsedArr.map(m=>{
+      const p = DATA.properties[m.property_index-1];
+      if(!p) return null;
+      const pd = propPriceDisplay(p);
+      return {title:p.title, sub:`${p.region} · ${pd.main}`, score:m.score, reason:m.reason};
+    }).filter(Boolean);
+    renderMatchResults(`فایل‌های مناسب برای ${l.name}`, results, 'هیچ فایل مناسبی یافت نشد.');
+  });
+}
+
+async function matchPropertyToLeads(propId){
+  const p = DATA.properties.find(x=>x.id===propId);
+  if(!p) return;
+  if(DATA.leads.length===0){ toast('ابتدا حداقل یک مشتری ثبت کنید'); return; }
+  if(!getApiKey()){ noApiKeyPrompt(); return; }
+  renderMatchLoading(`در حال یافتن مشتریان مناسب برای «${p.title}»...`);
+  const leadList = DATA.leads.map((l,i)=>`${i+1}. «${l.name}» | نیاز: ${NEED_LABELS[l.need]} | بودجه: ${l.budget} تومان | مرحله: ${FUNNEL_LABELS[l.stage]} | یادداشت: ${l.notes}`).join('\n');
+  const pd = propPriceDisplay(p);
+  const prompt = `این فایل ملکی را با بهترین مشتریان از لیست زیر تطبیق بده:
+فایل: «${p.title}»، نوع ملک: ${CATEGORY_LABELS[p.category]}، منطقه: ${p.region}، متراژ: ${p.area}، نوع معامله: ${DEALTYPE_LABELS[p.dealType]}، ${pd.sub}: ${pd.main} تومان، توضیحات: ${p.desc}
+
+لیست مشتریان:
+${leadList}
+
+خروجی را فقط به صورت آرایه JSON بده، هر آیتم شامل: {"lead_index": شماره مشتری از لیست بالا (عدد), "score": عدد بین ۰ تا ۱۰۰ درصد تطابق, "reason": "دلیل کوتاه تطابق در یک جمله فارسی"}. فقط ۱ تا ۳ بهترین گزینه را با بیشترین امتیاز برگردان، بدون هیچ متن اضافه یا بک‌تیک.`;
+  await runMatchAI(prompt, (parsedArr)=>{
+    const results = parsedArr.map(m=>{
+      const l = DATA.leads[m.lead_index-1];
+      return l ? {title:l.name, sub:`${l.phone||'بدون شماره'} · بودجه ${fmtPrice(l.budget)}`, score:m.score, reason:m.reason} : null;
+    }).filter(Boolean);
+    renderMatchResults(`مشتریان مناسب برای این فایل`, results, 'هیچ مشتری مناسبی یافت نشد.');
+  });
+}
+
+function renderMatchLoading(msg){
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `<h2>تطبیق هوشمند</h2><div class="voice-stage"><div class="typing" style="margin-bottom:10px;"><span></span><span></span><span></span></div><div class="voice-status">${msg}</div></div>`;
+  openModal();
+}
+async function runMatchAI(prompt, onParsed){
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: aiHeaders(),
+      body: JSON.stringify({
+        model: "claude-sonnet-5",
+        max_tokens: 800,
+        system: "تو موتور تطبیق مشتری و فایل ملکی در یک CRM املاک فارسی هستی. فقط خروجی JSON خواسته‌شده را برگردان، بدون هیچ توضیح اضافه یا بک‌تیک.",
+        messages: [{role:'user', content: prompt}]
+      })
+    });
+    const data = await response.json();
+    if(!response.ok){ closeModal(); handleAiHttpError(data); return; }
+    let raw = (data.content||[]).map(c=>c.text||'').join('').trim();
+    const match = raw.match(/\[[\s\S]*\]/);
+    if(!match) throw new Error('no json array');
+    const parsedArr = JSON.parse(match[0]);
+    onParsed(parsedArr);
+  }catch(e){
+    console.error(e);
+    document.getElementById('modalBody').innerHTML = `<h2>تطبیق هوشمند</h2><div class="empty"><p>خطا در تحلیل هوش مصنوعی. دوباره تلاش کنید.</p></div><div class="modal-actions"><button class="btn-primary" style="width:100%;" onclick="closeModal()">باشه</button></div>`;
+  }
+}
+function renderMatchResults(title, results, emptyMsg){
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2>${title}</h2>
+    ${results.length? results.sort((a,b)=>b.score-a.score).map(r=>`
+      <div class="match-item">
+        <span class="match-score">${r.score}% تطابق</span>
+        <div class="mt">${r.title}</div>
+        <div class="mr">${r.sub}</div>
+        <div class="mr" style="margin-top:6px;">${r.reason}</div>
+      </div>
+    `).join('') : `<div class="empty"><p>${emptyMsg}</p></div>`}
+    <div class="modal-actions"><button class="btn-primary" style="width:100%;" onclick="closeModal()">بستن</button></div>
+  `;
+}
+
+/* ============ AI ASSISTANT (CHAT) ============ */
+function renderAI(main){
+  const hasKey = !!getApiKey();
+  main.innerHTML = `
+    <div id="ai-view">
+      ${!hasKey?`
+      <div class="followup-card" style="cursor:pointer;margin-bottom:10px;" onclick="openSettingsModal()">
+        <div>
+          <div class="fu-name">🔑 کلید API تنظیم نشده</div>
+          <div class="fu-sub">برای فعال‌شدن دستیار هوشمند، کلید API را در تنظیمات وارد کنید</div>
+        </div>
+        <span class="followup-badge due">تنظیمات</span>
+      </div>`:''}
+      <div class="chat-scroll" id="chatScroll"></div>
+      <div class="quick-row" id="quickRow">
+        <button class="quick-chip" onclick="sendToAI('یک قیمت پیشنهادی منصفانه برای فروش آپارتمان ۱۱۰ متری در منطقه خودم پیشنهاد بده و توضیح بده چه عواملی مؤثرند.')">پیشنهاد قیمت</button>
+        <button class="quick-chip" onclick="sendToAI('یک متن آگهی حرفه‌ای و جذاب برای فروش یک آپارتمان بنویس. من مشخصات را در پیام بعدی می‌دهم.')">نوشتن آگهی</button>
+        <button class="quick-chip" onclick="sendToAI('یک پیام پیگیری مؤدبانه برای مشتری‌ای که چند روز است جواب نداده بنویس.')">پیام پیگیری</button>
+        <button class="quick-chip" onclick="sendToAI('بر اساس داده‌های فعلی من، وضعیت قیف فروش و کسب‌وکارم رو تحلیل کن و توصیه بده.')">تحلیل قیف فروش</button>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chatInput" rows="1" placeholder="سوال خود را بپرسید..."></textarea>
+        <button class="send-btn" onclick="handleSend()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l16-8-6 16-3-7-7-1z"/></svg>
+        </button>
+      </div>
+    </div>
+  `;
+  renderChatMessages();
+  document.getElementById('chatInput').addEventListener('keydown', e=>{
+    if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); handleSend(); }
+  });
+}
+function renderChatMessages(){
+  const scroll = document.getElementById('chatScroll');
+  if(!scroll) return;
+  if(chatHistory.length===0){
+    scroll.innerHTML = `<div class="empty" style="padding-top:30px;"><div class="em-icon">✦</div><p><b>دستیار هوشمند ملکیار</b><br>درباره قیمت‌گذاری، نوشتن آگهی، پیام به مشتری یا تحلیل قیف فروش بپرسید.</p></div>`;
+    return;
+  }
+  scroll.innerHTML = chatHistory.map(m=>`<div class="msg ${m.role==='user'?'user':'ai'}">${escapeHTML(m.content)}</div>`).join('');
+  scroll.scrollTop = scroll.scrollHeight;
+}
+function handleSend(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value='';
+  sendToAI(text);
+}
+async function sendToAI(userText){
+  if(!getApiKey()){ noApiKeyPrompt(); return; }
+  chatHistory.push({role:'user', content:userText});
+  renderChatMessages();
+  const scroll = document.getElementById('chatScroll');
+  const typingEl = document.createElement('div');
+  typingEl.className='msg ai';
+  typingEl.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  scroll.appendChild(typingEl);
+  scroll.scrollTop = scroll.scrollHeight;
+
+  const context = `
+تاریخ امروز (شمسی): ${toJalaliFull(Date.now())}
+خلاصه داده‌های CRM کاربر (برای استفاده در پاسخ در صورت نیاز):
+فایل‌های ملکی: ${DATA.properties.map(p=>{const pd=propPriceDisplay(p); return `«${p.title}» (${CATEGORY_LABELS[p.category]}) در ${p.region}، ${p.area} متر، ${DEALTYPE_LABELS[p.dealType]}، ${pd.sub} ${pd.main} تومان، وضعیت ${STATUS_LABELS[p.status]}`;}).join(' | ') || 'هیچ'}
+مشتریان: ${DATA.leads.map(l=>`«${l.name}»، نیاز: ${NEED_LABELS[l.need]}، بودجه ${l.budget}، مرحله قیف: ${FUNNEL_LABELS[l.stage]}`).join(' | ') || 'هیچ'}
+معاملات در جریان: ${DATA.deals.map(d=>`«${d.title}» مرحله ${STAGE_LABELS[d.stage]} ارزش ${d.value}`).join(' | ') || 'هیچ'}
+`;
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: aiHeaders(),
+      body: JSON.stringify({
+        model: "claude-sonnet-5",
+        max_tokens: 1000,
+        system: `تو دستیار هوش مصنوعی یک اپلیکیشن CRM برای مشاوران املاک ایرانی به نام «ملکیار» هستی. همیشه به زبان فارسی، حرفه‌ای، مختصر و کاربردی پاسخ بده و از تاریخ شمسی استفاده کن. در قیمت‌گذاری و تحلیل بازار، فرض‌های خودت را شفاف بیان کن و تأکید کن که پیشنهاد است نه قیمت قطعی. وقتی متن آگهی یا پیام برای مشتری می‌نویسی، لحن حرفه‌ای و صمیمی داشته باش. ${context}`,
+        messages: chatHistory.map(m=>({role:m.role, content:m.content}))
+      })
+    });
+    const data = await response.json();
+    typingEl.remove();
+    if(!response.ok){ handleAiHttpError(data); chatHistory.pop(); renderChatMessages(); return; }
+    let reply = '';
+    if(data && data.content){
+      reply = data.content.map(c=>c.text||'').filter(Boolean).join('\n');
+    }
+    if(!reply) reply = 'متأسفم، پاسخی دریافت نشد. لطفاً دوباره امتحان کنید.';
+    chatHistory.push({role:'assistant', content:reply});
+    renderChatMessages();
+  }catch(e){
+    typingEl.remove();
+    chatHistory.push({role:'assistant', content:'خطا در برقراری ارتباط با دستیار هوشمند. اتصال اینترنت و کلید API را بررسی کنید.'});
+    renderChatMessages();
+    console.error(e);
+  }
+}
+
+/* ============ INIT ============ */
+loadData();
+document.getElementById('fabBtn').style.display='flex';
+</script>
+</body>
+</html>
